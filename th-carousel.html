@@ -311,12 +311,7 @@ Element providing a 3D carousel for either text or images.
           panel = elements[i];
 
           if (this.animateOn == 'tap'){
-            // For Composer mobile tap events
-            panel.addEventListener('touchend' ,function() {
-              self.animate();
-            });
-            // For normal click and tap events
-            panel.addEventListener('tap' ,function() {
+            panel.addEventListener('down' ,function() {
               self.animate();
             });
           } 
