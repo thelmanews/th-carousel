@@ -281,7 +281,6 @@ Element providing a 3D carousel for either text or images.
         this._panelCount = this._panels.length;
         this.modify();
 
-
         setTimeout( function(){
           carousel.classList.add('ready');
         }, 0);
@@ -338,8 +337,7 @@ Element providing a 3D carousel for either text or images.
         }
 
         // adjust rotation so panels are always flat
-        this.rotation = Math.round( this.rotation / this.theta ) * this.theta;
-
+        this.rotation = Math.round( this.rotation / this.theta ) * this.theta
         this.transform();
 
       },
@@ -356,9 +354,13 @@ Element providing a 3D carousel for either text or images.
       },
 
       animate: function() {
-        this.rotation -= this.theta;
         this.transform();
+        this.rotation -= this.theta;
 
+      },
+      reset: function(){
+        this.rotation = 0;
+        this.transform();
       }
 
     });
