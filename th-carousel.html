@@ -118,7 +118,7 @@ Element providing a 3D carousel for either text or images.
 
     </style>
     <!-- Inline styles for mobile and Safari --> 
-    <div class="container" style="width: {{width}}px; height: {{height}}px;">
+    <div class="container" style="width: {{computedWidth}}px; height: {{computedHeight}}px;">
       
       <div id="carousel" class="panels-backface-invisible" style="-webkit-transform-style: preserve-3d; -webkit-transition: -webkit-transform 1s;">
         <content></content>
@@ -140,7 +140,7 @@ Element providing a 3D carousel for either text or images.
 
   </template>
 
-  <link rel="import" href="lib/modernizr-import.html">
+  <!-- <link rel="import" href="lib/modernizr-import.html"> -->
 
   <script>
 
@@ -203,12 +203,20 @@ Element providing a 3D carousel for either text or images.
       _panelCount: 0,
 
       /**
-       * The `width` property specifies width of the component in pixels.
+       * The `width` property specifies width of the component in pixels or percent.
        *
        * @attribute width
-       * @type integer
+       * @type string
        */
       width: '300',
+
+      /**
+       * The `height` property specifies height of the component in pixels or percent.
+       *
+       * @attribute height
+       * @type string
+       */
+      height: '300',
 
       /**
        * The `fontSize` property specifies fontSize in pixels.
@@ -260,6 +268,10 @@ Element providing a 3D carousel for either text or images.
               ],
 
       init: function() {
+        var self = this;
+        self.computedWidth=self.computeWidth(self.width);
+        self.computedHeight=self.computeHeight(self.height);
+
         var element = this;
             carousel = this.shadowRoot.getElementById('carousel'),
             axisButton = this.shadowRoot.getElementById('toggle-axis'),
@@ -297,7 +309,7 @@ Element providing a 3D carousel for either text or images.
         var self = this,
             panel, angle, i;
         
-        this.panelSize = this.isHorizontal ? this.width : this.height;
+        this.panelSize = this.isHorizontal ? this.computedWidth : this.computedHeight
         this.rotateFn = this.isHorizontal ? 'rotateY' : 'rotateX';
         this.theta = 360 / this._panelCount;
 
@@ -349,7 +361,6 @@ Element providing a 3D carousel for either text or images.
        * @return {Object} Returns undefined.
        */
       transform: function() {
-        console.log(this.radius);
         this.$.carousel.style[ this.transformProp ] = 'translateZ(-' + this.radius + 'px) ' + this.rotateFn + '(' + this.rotation + 'deg)';
       },
 
