@@ -21,7 +21,7 @@ Element providing a 3D carousel for either text or images.
 @status alpha
 @homepage http://aendrew.github.io/th-carousel
 -->
-<polymer-element name="th-carousel" extends="th-animated" attributes="items animateOn interval isHorizontal backfaces fontSize">
+<polymer-element name="th-carousel" extends="th-animated" attributes="items animateOn interval isHorizontal backfaces fontSize textColor">
 
   <template>
 
@@ -125,7 +125,7 @@ Element providing a 3D carousel for either text or images.
         <template if="{{items}}">
           <template repeat="{{item in items}}">
             <div class="panel" style="background: url('{{item.image}}') center center no-repeat; background-size: cover; font-size: {{fontSize}}px; display: table; position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; vertical-align: middle; margin: 0; text-align: center; -webkit-transition: opacity 1s, -webkit-transform 1s; -webkit-backface-visibility: hidden;"> 
-              <p class="mainpoint" style="display: table-cell; vertical-align: middle; text-align: center; -webkit-margin-before: 0; -webkit-margin-after: 0; margin: 0;">{{item.text}} </p>
+              <p class="mainpoint" style="display: table-cell; vertical-align: middle; text-align: center; -webkit-margin-before: 0; -webkit-margin-after: 0; margin: 0; color: {{textColor}};">{{item.text}} </p>
             </div>
           </template>
         </template>
@@ -231,6 +231,12 @@ Element providing a 3D carousel for either text or images.
        */
       // transformProp: Modernizr.prefixed('transform'),
       transformProp: "-webkit-transform",
+      
+      /**
+       * The 'textColor' property styles the text on panels with that color.
+       * @type {String}
+       */
+      textColor: 'white',
       /** ITEMS represent another way to create panels that can contain text or image
        ** @type {Array} 
        *
@@ -242,9 +248,9 @@ Element providing a 3D carousel for either text or images.
        *
        */
       items: [  
-                {text: "", image: "../thelma-all/images/person.jpg"},
-                {text: "", image: "../thelma-all/images/person-right.jpg"},
-                {text: "", image: "../thelma-all/images/person.jpg"},
+                {text: "sad", image: "../thelma-all/images/person.jpg"},
+                {text: "asdasd", image: "../thelma-all/images/person-right.jpg"},
+                {text: "asddas", image: "../thelma-all/images/person.jpg"},
                 {text: "", image: "../thelma-all/images/person-right.jpg"}  
               ],
 
