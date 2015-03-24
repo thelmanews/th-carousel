@@ -283,6 +283,8 @@ Element providing a 3D carousel for either text or images.
         self.width=self.computeWidth();
         self.height=self.computeHeight();
 
+        self._setTransformProp();
+
         var element = this;
             carousel = this.shadowRoot.getElementById('carousel'),
             axisButton = this.shadowRoot.getElementById('toggle-axis'),
@@ -383,6 +385,26 @@ Element providing a 3D carousel for either text or images.
       reset: function(){
         this.rotation = 0;
         this.transform();
+      },
+
+      _setTransformProp: function() {
+        var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0,
+            isFirefox = typeof InstallTrigger !== 'undefined',   // Firefox 1.0+
+            isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 ||
+                      /^((?!chrome).)*safari/i.test(navigator.userAgent),
+            isChrome = !!window.chrome && !isOpera,              // Chrome 1+
+            isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
+
+        if(isSafari || isChrome) {
+          this.transformProp = '-webkit-transform';
+        }
+        else if(isFirefox) {
+          this.transformProp = '-moz-transform';
+        }
+        else if(isIE) {
+          this.transformProp = '-ms-transform';
+        }
+
       }
 
     });
